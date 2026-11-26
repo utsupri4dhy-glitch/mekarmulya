@@ -215,11 +215,12 @@
 
         <!-- ================= PANEL TENGAH (DATA MASTER & RIWAYAT & USERS) ================= -->
         <aside class="w-80 bg-white border-r border-gray-200 flex flex-col h-full shadow-sm z-10 no-print">
-            <div class="flex border-b border-gray-200">
-                <button onclick="switchTabData('customer')" id="tab-customer"
-                    class="flex-1 py-3 text-sm font-semibold text-blue-600 border-b-2 border-blue-600 bg-blue-50">Customer</button>
-                <button onclick="switchTabData('barang')" id="tab-barang"
-                    class="flex-1 py-3 text-sm font-semibold text-gray-500 hover:text-gray-700">Barang</button>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="inputNamaCustomer" placeholder="Nama Customer..."
+                    class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <!-- UBAH BAGIAN INI -->
+                <button onclick="bukaModalTambahCustomer('inputNamaCustomer')"
+                    class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 text-sm font-medium">+</button>
             </div>
 
             <div id="panel-customer" class="flex-1 flex flex-col overflow-hidden p-4">
@@ -940,25 +941,29 @@
             localStorage.setItem('mm_customers', JSON.stringify(appCustomers));
 
             renderSidebarData();
-            document.getElementById(targetId).value = newCust.id;
+
+            // Jika form dibuka dari dropdown (Invoice/Penawaran)
+            if (targetId === 'invCustomer' || targetId === 'penCustomer') {
+                document.getElementById(targetId).value = newCust.id;
+            }
+            // Jika form dibuka dari panel tengah (input text)
+            else if (targetId === 'inputNamaCustomer') {
+                document.getElementById(targetId).value = newCust.nama;
+            }
 
             tutupModalCustomer();
             showToast("Customer baru berhasil ditambahkan!");
         }
 
+        // Fungsi tambah dari Sidebar (Sekarang menggunakan Modal)
         function simpanCustomerBaru() {
             const nama = document.getElementById('inputNamaCustomer').value;
             if (!nama) {
-                showToast("Nama customer tidak boleh kosong!", "error");
+                showToast("Ketik nama customer terlebih dahulu di kolom input!", "error");
                 return;
             }
-            const alamat = prompt("Masukkan alamat lengkap customer:", "Alamat belum diatur");
-
-            appCustomers.push({ id: 'C' + Date.now(), nama: nama, alamat: alamat || "-" });
-            localStorage.setItem('mm_customers', JSON.stringify(appCustomers));
-            document.getElementById('inputNamaCustomer').value = '';
-            renderSidebarData();
-            showToast("Customer ditambahkan!");
+            // Buka modal dengan membawa ID input (agar setelah disimpan, kolom input otomatis terisi)
+            bukaModalTambahCustomer('inputNamaCustomer');
         }
 
         function hapusCustomer(id) {
