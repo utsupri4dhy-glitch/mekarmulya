@@ -1,0 +1,38 @@
+{
+    "perusahaan": {
+        "nama": "CV. MEKAR MULYA",
+        "alamat": "Jl. Kumpai Batu Perumahan Bumi Asih Permai Gg.7/7 Pangkalan Bun",
+        "telepon": "HP. 0812 7207 0908 / 0815 2823 8490",
+        "bank": "Bank Rakyat Indonesia No Rek : 1806-01-000797-56-9",
+        "pemilik": "Iwan Yulianto"
+    },
+    "customers": [
+        {
+            "id": "CUST-01",
+            "nama": "PT. DAIKIN AIRCONDITIONING INDONESIA",
+            "alamat": "JL. Wahid Hasyim II No. 8 Sempaja Selatan, Samarinda Utara, Kalimantan Timur"
+        }
+    ],
+    "items": [
+        {
+            "kode": "FTP25AV14",
+            "nama": "4026459 COIL SENSOR",
+            "harga": 59940
+        },
+        {
+            "kode": "FTC20NV14",
+            "nama": "2545180 PCB ASSY (MAIN)",
+            "harga": 609390
+        },
+        {
+            "kode": "JASA-01",
+            "nama": "Jasa Service Kategori B",
+            "harga": 125000
+        },
+        {
+            "kode": "TRANS-01",
+            "nama": "Transportasi Darat Per 25 KM",
+            "harga": 35000
+        }
+    ]
+}
